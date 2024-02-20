@@ -29,15 +29,15 @@ Route::get('tag/{tag}', [PostController::class,'tag'])->name('posts.tag');
 // Route::post('/comentar', [PostController::class,'comentar'])->name("posts.comentar");
 
 
- 
+
 Route::get('/login-google', function () {
     return Socialite::driver('google')->redirect();
 });
- 
+
 Route::get('/google-callback', function () {
     $user = Socialite::driver('google')->user();
     //dd($user);
-    
+
     $userExists = User::where('email', $user->email)->first();
     if($userExists){
         Auth::login($userExists);
@@ -50,9 +50,7 @@ Route::get('/google-callback', function () {
 
         Auth::login($userNew);
     }
-
     return redirect ('/');
-
 });
 
 Route::middleware([
