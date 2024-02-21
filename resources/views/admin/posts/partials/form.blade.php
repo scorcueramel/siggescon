@@ -89,8 +89,8 @@
 
 <div class="form-group">
     {!! Form::label('extract', 'Resumen') !!}
-    <!-- {!! Form::textarea('extract', null, ['class' => 'form-control']) !!} -->
-    <textarea name="extract" class="form-control" id="extract" cols="30" rows="10" style="height: 350px !important;"></textarea>
+    {!! Form::textarea('extract', null, ['class' => 'form-control']) !!}
+    <!-- <textarea name="extract" class="form-control" id="extract" cols="30" rows="10" style="height: 350px !important;"></textarea> -->
     @error('extract')
     <small class="text-danger">{{ $message }}</small>
     @enderror
@@ -99,8 +99,8 @@
 
 <div class="form-group">
     {!! Form::label('body', 'Detalle') !!}
-    <textarea name="body" class="form-control" id="body" cols="30" rows="10" style="height: 350px !important;"></textarea>
-    <!-- {!! Form::textarea('body', null, ['class' => 'form-control']) !!} -->
+    <!-- <textarea name="body" class="form-control" id="body" cols="30" rows="10" style="height: 350px !important;"></textarea> -->
+    {!! Form::textarea('body', null, ['class' => 'form-control']) !!}
 
     @error('body')
         <small class="text-danger">{{ $message }}</small>

@@ -59,6 +59,9 @@ class PostController extends Controller
     {
         $this->authorize('author',$post);
 
+
+        // dd($post);
+
         $categories = Category::pluck('name','id');
         $tags = Tag::all();
 
