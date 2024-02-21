@@ -31,11 +31,12 @@ class PostController extends Controller
             ->take(4)
             ->get();
 
-        $comentarios = DB::select('select  comentarios.post_id,comentarios.user_id,
-                                           comentarios.comentario,comentarios.created_at,
-                                           users.name from blog.comentarios
-                                     inner join blog.users on  comentarios.user_id = users.id
-                                     where comentarios.post_id= ?  order by comentarios.id desc', [$post->id]);
+        $comentarios = DB::select('select
+                                    comentarios.post_id,comentarios.user_id,
+                                    comentarios.comentario,comentarios.created_at,
+                                    users.name from comentarios
+                                    inner join users on  comentarios.user_id = users.id
+                                    where comentarios.post_id= ?  order by comentarios.id desc', [$post->id]);
 
         return view('posts.show', compact('post', 'similares', 'comentarios'));
     }
@@ -47,10 +48,10 @@ class PostController extends Controller
             ->paginate(8);
 
         $etiquetas =  Tag::all();
-        /*        $tags = DB::select('select distinct tags.* from blog.tags
-                            inner join blog.post_tag on post_tag.tag_id = tags.id
-                            inner join blog.posts on  post_tag.post_id = posts.id
-                            inner join blog.categories on posts.category_id  = categories.id
+        /*        $tags = DB::select('select distinct tags.* from tags
+                            inner join post_tag on post_tag.tag_id = tags.id
+                            inner join posts on  post_tag.post_id = posts.id
+                            inner join categories on posts.category_id  = categories.id
                             where categories.id = ?',[$category->id]);   */
 
         return view('posts.category', compact('posts', 'category', 'etiquetas'));
@@ -83,8 +84,8 @@ class PostController extends Controller
 
         $comentarios = DB::select('select  comentarios.post_id,comentarios.user_id,
                                     comentarios.comentario,comentarios.created_at,
-                                    users.name from blog.comentarios
-                                    inner join blog.users on  comentarios.user_id = users.id
+                                    users.name from comentarios
+                                    inner join users on  comentarios.user_id = users.id
                                     where comentarios.post_id= ? order by comentarios.id desc', [$post[0]->id]);
 
 

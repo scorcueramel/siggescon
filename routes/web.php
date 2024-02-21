@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use Laravel\Socialite\Facades\Socialite;
@@ -65,3 +66,5 @@ Route::middleware([
 
 
 Route::post('comentar-post', [PostController::class, 'comment'])->name('comentar');
+
+Route::post('image/upload',[ImageController::class, 'upload'])->name('image.upload');

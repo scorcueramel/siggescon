@@ -34,7 +34,7 @@
 
         .ck-editor__editable[role="textbox"] {
             /* Editing area */
-            min-height: 300px;
+            min-height: 250px;
         }
 
         .ck-content .image {
@@ -45,8 +45,9 @@
     </style>
 @stop
 @section('js')
-
     <script src="{{ asset('vendor/jQuery-Plugin-stringToSlug-1.3/jquery.stringToSlug.min.js') }}"></script>
+    {{-- CKEDITOR --}}
+    <script src="{{ asset('vendor/ckeditor5/build/ckeditor.js') }}"></script>
     <script>
         $(document).ready(function() {
             $("#name").stringToSlug({
@@ -68,5 +69,29 @@
 
             reader.readAsDataURL(file);
         }
+
+
+        ClassicEditor
+            .create(document.querySelector('#extract'),{
+                // Placeholder
+                placeholder: 'Ingresa tu texto aquí.',
+                simpleUpload:{
+                    uploadUrl: "{{ route('image.upload') }}",
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#body'),{
+                // Placeholder
+                placeholder: 'Ingresa tu texto aquí.',
+                simpleUpload:{
+                    uploadUrl: "{{ route('image.upload') }}",
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 @endsection
