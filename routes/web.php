@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -18,6 +19,15 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+// RUTAS PARA LA AUTENTICACIÓN NATIVA
+Route::view("/login", "auth.login")->name("login");
+Route::view("/registro","auth.register")->name("regitro");
+
+Route::post("/validar-registros",[AuthController::class, "register"])->name("validar-registro");
+Route::post("/iniciar-sesion",[AuthController::class, "login"])->name("inicia-sesion");
+// Route::post("/cerrar-sesion",[AuthController::class, "logout"])->name("cerrar-sesion");
+
+
 /* Route::get('/', function () {
     return view('welcome');
 });
@@ -29,30 +39,28 @@ Route::get('tag/{tag}', [PostController::class,'tag'])->name('posts.tag');
 Route::get('tag/{tag}', [PostController::class,'tag'])->name('posts.tag');
 // Route::post('/comentar', [PostController::class,'comentar'])->name("posts.comentar");
 
+// Route::get('/login-google', function () {
+//     return Socialite::driver('google')->redirect();
+// });
 
+// Route::get('/google-callback', function () {
+//     $user = Socialite::driver('google')->user();
+//     //dd($user);
 
-Route::get('/login-google', function () {
-    return Socialite::driver('google')->redirect();
-});
+//     $userExists = User::where('email', $user->email)->first();
+//     if($userExists){
+//         Auth::login($userExists);
+//     } else {
+//        $userNew = User::create([
+//             'name'=> $user->name,
+//             'email'=> $user->email,
+//             'password'=> Illuminate\Support\Facades\Hash::make('1234')
+//         ]);
 
-Route::get('/google-callback', function () {
-    $user = Socialite::driver('google')->user();
-    //dd($user);
-
-    $userExists = User::where('email', $user->email)->first();
-    if($userExists){
-        Auth::login($userExists);
-    } else {
-       $userNew = User::create([
-            'name'=> $user->name,
-            'email'=> $user->email,
-            'password'=> Illuminate\Support\Facades\Hash::make('1234')
-        ]);
-
-        Auth::login($userNew);
-    }
-    return redirect ('/');
-});
+//         Auth::login($userNew);
+//     }
+//     return redirect ('/');
+// });
 
 Route::middleware([
     'auth:sanctum',

@@ -13,10 +13,10 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('/login') }}">
+        <form method="POST" action="{{ route('inicia-sesion') }}">
             @csrf
 
-            {{-- <div>
+            <div>
                 <x-jet-label for="email" value="{{ __('Correo electrónico') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
@@ -43,10 +43,10 @@
                 <x-jet-button class="ml-4">
                     {{ __('Log in') }}
                 </x-jet-button>
-            </div> --}}
+            </div>
         </form>
         <div  align="center">
-        <img src="{{ url('logo_gti_sm.png') }}" height="10px" style="all"class="mt-8" />
+        <img src="{{ url('logo_gti_sm.png') }}" height="10px" style="all" class="mt-8" />
         </div>
     </x-jet-authentication-card>
 </x-guest-layout>
